@@ -1,0 +1,28 @@
+{
+  "name": "bluetrace",
+  "version": "1.0.0",
+  "description": "bluetrace",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^8.1.1",
+    "firebase-admin": "^9.4.1",
+    "heroku": "^7.47.11",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unizam12/BlueTrace-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unizam12/BlueTrace-Backend/issues"
+  },
+  "homepage": "https://github.com/unizam12/BlueTrace-Backend#readme"
+}
