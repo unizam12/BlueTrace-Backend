@@ -37,10 +37,10 @@ const liam = usersDb.doc('lragozzine');
 //     age: '47'
 // });
 
-function noti(tok){
+function noti(tok){//add name variable later
 
     var message = {
-        notification: {title: 'Price drop', body: '5% off all electronics'},
+        notification: {title: 'Covid Contact Alert', body: 'Someone you\'ve recently met has been tested Covid Positive, Please have yourself tested and quranteened.'},
     token: tok
     };
 
