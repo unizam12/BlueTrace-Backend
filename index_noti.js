@@ -394,7 +394,7 @@ http.createServer(function (req, res) {
 
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Server Up and Running');
-}).listen(8080);
+}).listen(process.env.PORT ||8080);
 
 
 
