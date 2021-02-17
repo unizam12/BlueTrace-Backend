@@ -1,6 +1,6 @@
 {
   "name": "bluetrace",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "bluetrace",
   "main": "index.js",
   "dependencies": {
