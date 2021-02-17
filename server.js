@@ -27,7 +27,9 @@ router.get("/", function (req, res) {
 // router.all("/", function (req, res) {
 //   res.send({ message: "welcome to our upload module apis" });
 // });
-
+app.get('/', (req, res) => {
+    res.send('Blue Trace back end server!')
+  })
 
 app.use(getIndex)
 app.use("/myserver", router);
