@@ -335,9 +335,20 @@ function test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot){
 }
 
 
-
-getAllDataFromFirebase(db)
-
+exports.display = async function(req, res){
+    getAllDataFromFirebase(db)
+    const usersDb = db.collection('testingTable'); 
+    const liam = usersDb.doc('lragozzine'); 
+    console.log(db.collection('testingTable'))
+    liam.set({
+        first: 'TEST',
+        last: 'TEST',
+        address: '133 5th St., San Francisco, CA',
+        birthday: '05/13/1990',
+        age: '30'
+        // test1:'abc'
+       });
+};
 //Notification Implementation:
 
 

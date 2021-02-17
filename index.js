@@ -234,11 +234,11 @@ async function getAllDataFromFirebase(db) {
 }
 
 function test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot){
-    console.log('COVID pos user name',cpUser,cpUser)
-    console.log('COVID pos user uuid',cpUuid)
-    console.log('User close contact user name',uccName)
-    console.log('User close contact user ID 1',uccUuid1)
-    console.log('User close contact user ID 2',uccUuid2)
+    // console.log('COVID pos user name',cpUser,cpUser)
+    // console.log('COVID pos user uuid',cpUuid)
+    // console.log('User close contact user name',uccName)
+    // console.log('User close contact user ID 1',uccUuid1)
+    // console.log('User close contact user ID 2',uccUuid2)
     console.log('recently notified',recNot)
 
     var notifyUsersID=[]
@@ -298,9 +298,42 @@ function test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot){
 
     
 }
-getAllDataFromFirebase(db)
+// getAllDataFromFirebase(db)
 
     
+// exports.display = async function(req, res){
+//     getAllDataFromFirebase(db)
+//     const usersDb = db.collection('testingTable'); 
+//     const liam = usersDb.doc('lragozzine'); 
+//     liam.set({
+//         first: 'TEST',
+//         last: 'TEST',
+//         address: '133 5th St., San Francisco, CA',
+//         birthday: '05/13/1990',
+//         age: '30'
+//         // test1:'abc'
+//        });
+// };
+
+module.exports = function(req, res, next) {
+    console.log("authondication checker process");
+    // if (req.session.auth || req.path === '/auth') {
+    //     next();
+    // } else {
+    //     res.redirect("/auth");
+    // }
+    getAllDataFromFirebase(db)
+    const usersDb = db.collection('testingTable'); 
+    const liam = usersDb.doc('lragozzine'); 
+    liam.set({
+        first: 'TEST',
+        last: 'TEST',
+        address: '133 5th St., San Francisco, CA',
+        birthday: '05/13/1990',
+        age: '30'
+        // test1:'abc'
+       });
+}
 
 
 
