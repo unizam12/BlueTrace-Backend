@@ -5,6 +5,8 @@ let cors = require("cors");
 const PORT = process.env.PORT || 3000;
 var router = express.Router();
 var app = express();
+var getIndex = require("./index.js");
+var getIndexNoti = require("./index_noti.js")
 
 // body parser added
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,7 +17,6 @@ app.use('/files', express.static(path.join(__dirname , 'public')));
 
 // test route
 
-var getIndex = require("./index.js");
 
 router.get("/", function (req, res) {
     res.send({ message: "trying to deploy backend" });
@@ -28,10 +29,11 @@ router.get("/", function (req, res) {
 //   res.send({ message: "welcome to our upload module apis" });
 // });
 app.get('/', (req, res) => {
-    res.send('Blue Trace back end server!')
+    res.send('Blue Trace back end server!!')
   })
 
-app.use(getIndex)
+// app.use(getIndex)
+app.use(getIndexNoti)
 app.use("/myserver", router);
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`)

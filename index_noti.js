@@ -4,13 +4,15 @@ const { result } = require("lodash");
 
 var serviceAccount = require("./bluetrace-lums-sproj-firebase-adminsdk-nrue3-cf47aba60c.json");
 
-firebase.initializeApp({
-//   credential: firebase.credential.cert(serviceAccount),
-    // credential: firebase.credential.applicationDefault(),
-    credential: firebase.credential.cert(serviceAccount),
-//   serviceAccount : "./bluetrace-lums-sproj-firebase-adminsdk-nrue3-cf47aba60c.json",
-//   databaseURL: "https://bluetrace-lums-sproj.firebaseio.com/"
-});
+if (!firebase.apps.length) {
+    firebase.initializeApp({
+        //   credential: firebase.credential.cert(serviceAccount),
+        // credential: firebase.credential.applicationDefault(),
+        credential: firebase.credential.cert(serviceAccount),
+        //   serviceAccount : "./bluetrace-lums-sproj-firebase-adminsdk-nrue3-cf47aba60c.json",
+        //   databaseURL: "https://bluetrace-lums-sproj.firebaseio.com/"
+    });    
+}
 
 const db = firebase.firestore();
 var tokenList = {};
@@ -335,32 +337,88 @@ function test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot){
 }
 
 
-exports.display = async function(req, res){
+// exports.display = async function(req, res){
+//     getAllDataFromFirebase(db)
+//     const usersDb = db.collection('testingTable'); 
+//     const liam = usersDb.doc('lragozzine'); 
+//     console.log(db.collection('testingTable'))
+//     liam.set({
+//         first: 'TEST',
+//         last: 'TEST',
+//         address: '133 5th St., San Francisco, CA',
+//         birthday: '05/13/1990',
+//         age: '30'
+//         // test1:'abc'
+//        });
+// };
+
+module.exports = function(req, res, next) {
+    console.log("authondication checker process");
+    // if (req.session.auth || req.path === '/auth') {
+    //     next();
+    // } else {
+    //     res.redirect("/auth");
+    // }
     getAllDataFromFirebase(db)
     const usersDb = db.collection('testingTable'); 
     const liam = usersDb.doc('lragozzine'); 
-    console.log(db.collection('testingTable'))
     liam.set({
-        first: 'TEST',
+        first: 'TEST11',
         last: 'TEST',
         address: '133 5th St., San Francisco, CA',
         birthday: '05/13/1990',
         age: '30'
         // test1:'abc'
        });
-};
+    // module.exports.admin = firebase
+    var tokken, guid;
+    if(req.method === "POST")
+        {
+            
+            var body = "";
+            req.on("data", function (piece) {
+                body += piece;
+            }).on("end", function(){
+
+
+
+                const obj = JSON.parse(body);
+                tokken = obj.token;
+                guid = obj.uuid;
+
+
+
+
+
+                noti(tokken);
+                
+
+                if (tokenList[guid] === undefined){
+                    tokenList[guid] = [tokken];
+                }
+                else if(tokenList[guid] != tokken){
+                    tokenList[guid].push(tokken)
+                }
+
+
+                //tokenList[guid] = tokken;
+                //console.log(tokenList);
+
+            });
+
+
+            
+            res.writeHead(201, { "Content-Type": "text/html" });
+            return res.end();
+        }
+
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Server Up and Running');
+}
+
+
 //Notification Implementation:
-
-
-
-module.exports.admin = firebase
-
-
-
-
-
-
-
+/*module.exports.admin = firebase
 http.createServer(function (req, res) {
     var tokken, guid;
     if(req.method === "POST")
@@ -405,7 +463,7 @@ http.createServer(function (req, res) {
 
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Server Up and Running');
-}).listen(process.env.PORT ||8080);
+}).listen(process.env.PORT ||8080);*/
 
 
 
