@@ -322,7 +322,7 @@ module.exports = function(req, res, next) {
     // } else {
     //     res.redirect("/auth");
     // }
-    getAllDataFromFirebase(db)
+    getAllDataFromFirebase(db);
     const usersDb = db.collection('testingTable'); 
     const liam = usersDb.doc('lragozzine'); 
     liam.set({

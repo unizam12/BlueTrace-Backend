@@ -149,6 +149,8 @@ async function getAllDataFromFirebase(db) {
     
     // Get user close contact name
     var uccName=[]
+    var timestamp=[]
+    var location=[]
     var uccUuid1 = []
     var uccUuid2 = []
     // closeTable.forEach(doc =>{
@@ -230,6 +232,14 @@ async function getAllDataFromFirebase(db) {
         if (change.type === 'added') {
             cpUuid.push(change.doc.data().uuid)
             cpUser.push(change.doc.data().user)
+
+            db.collection('contactData').where("sndUserUUID", "==", change.doc.data().uuid).get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data());
+                    db.collection('contactData').doc(doc.id).set({covidStatus:true},SetOptions(true));
+                });
+            }); 
         }
         // if (change.type === 'removed') {
         //     const indexUuid = cpUuid.indexOf(change.doc.data().uuid)
@@ -239,7 +249,12 @@ async function getAllDataFromFirebase(db) {
         //         cpUser.splice(indexUser,1)
         //     } 
         // }
+
+
+
+
     });
+    
     console.log("SENDING COVID POS TABLE UPDATE")
     test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot)
     });
@@ -248,9 +263,24 @@ async function getAllDataFromFirebase(db) {
     .onSnapshot(querySnapshot => {
         querySnapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
-            uccName.push(change.doc.data().name)
-            uccUuid1.push(change.doc.data().uuid1)
-            uccUuid2.push(change.doc.data().uuid2)
+            uccName.push(change.doc.data().name);
+            var currUUID = change.doc.data().uuid1;
+            uccUuid1.push(change.doc.data().uuid1);
+            uccUuid2.push(change.doc.data().uuid2);
+            timestamp.push(change.doc.data().timestamp);
+            var times = change.doc.data().timestamp;
+            location.push(change.doc.data().location);
+            var loc = change.doc.data().location;
+            console.log("detected");
+            console.log(change.doc.data().name);
+            //db.collection('users').
+            db.collection('users').where("uuid", "==", change.doc.data().uuid2).get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data());
+                    db.collection('contactData').add({uuid:currUUID,sndUserUUID:doc.data().uuid2,sndUserName:doc.data().name,covidStatus:doc.data().covidStatus,location:loc,timestamp:times});
+                });
+            });       
         }
         if (change.type === 'removed') {
             const indexName = cpUuid.indexOf(change.doc.data().name)
@@ -263,6 +293,14 @@ async function getAllDataFromFirebase(db) {
             } 
         }
     });
+
+        
+    //     (doc) => {
+    //         db.collection('contactData').add({uuid:uccUuid1[0],sndUserName:doc.data().name,covidStatus:doc.data().covidStatus,location:location[0],timestamp:timestamp[0]});
+    //     }
+    // ).catch((error) => {
+    //     console.log("Error getting document:", error);
+    // });
     console.log("SENDING USER CLOSE CONTACT TABLE UPDATE")
     test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot)
     });
@@ -420,6 +458,7 @@ module.exports = function(req, res, next) {
 //Notification Implementation:
 /*module.exports.admin = firebase
 http.createServer(function (req, res) {
+
     var tokken, guid;
     if(req.method === "POST")
         {
@@ -432,26 +471,22 @@ http.createServer(function (req, res) {
 
 
                 const obj = JSON.parse(body);
-                tokken = obj.token;
-                guid = obj.uuid;
-
-
-
-
-
-                noti(tokken);
                 
-
-                if (tokenList[guid] === undefined){
-                    tokenList[guid] = [tokken];
+                if (obj.callType === "noti_token_provision"){
+                    console.log(obj.callType);
+                    tokken = obj.token;
+                    guid = obj.uuid;
+                    noti(tokken);
+                    if (tokenList[guid] === undefined){
+                        tokenList[guid] = [tokken];
+                    }
+                    else if(tokenList[guid] != tokken){
+                        tokenList[guid].push(tokken)
+                    }
+                    //tokenList[guid] = tokken;
+                    //console.log(tokenList);
                 }
-                else if(tokenList[guid] != tokken){
-                    tokenList[guid].push(tokken)
-                }
 
-
-                //tokenList[guid] = tokken;
-                //console.log(tokenList);
 
             });
 
