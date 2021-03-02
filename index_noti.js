@@ -267,6 +267,7 @@ async function getAllDataFromFirebase(db) {
             var currUUID = change.doc.data().uuid1;
             uccUuid1.push(change.doc.data().uuid1);
             uccUuid2.push(change.doc.data().uuid2);
+            var uuid2 = change.doc.data().uuid2;
             timestamp.push(change.doc.data().timestamp);
             var times = change.doc.data().timestamp;
             location.push(change.doc.data().location);
@@ -278,7 +279,7 @@ async function getAllDataFromFirebase(db) {
                 querySnapshot.forEach(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
-                    db.collection('contactData').add({uuid:currUUID,sndUserUUID:doc.data().uuid2,sndUserName:doc.data().name,covidStatus:doc.data().covidStatus,location:loc,timestamp:times});
+                    db.collection('contactData').add({uuid:currUUID,sndUserUUID:uuid2,sndUserName:doc.data().name,covidStatus:doc.data().covidStatus,location:loc,timestamp:times});
                 });
             });       
         }
