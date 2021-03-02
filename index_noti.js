@@ -422,22 +422,21 @@ module.exports = function(req, res, next) {
 
 
                 const obj = JSON.parse(body);
-                tokken = obj.token;
-                guid = obj.uuid;
+                var type = obj.callType;
 
-
-
-
-
-                noti(tokken);
-                
-
-                if (tokenList[guid] === undefined){
-                    tokenList[guid] = [tokken];
+                if(type === "noti_token_provision"){
+                    tokken = obj.token;
+                    guid = obj.uuid;
+                    noti(tokken);
+                    if (tokenList[guid] === undefined){
+                        tokenList[guid] = [tokken];
+                    }
+                    else if(tokenList[guid] != tokken){
+                        tokenList[guid].push(tokken)
+                    }
                 }
-                else if(tokenList[guid] != tokken){
-                    tokenList[guid].push(tokken)
-                }
+
+
 
 
                 //tokenList[guid] = tokken;
