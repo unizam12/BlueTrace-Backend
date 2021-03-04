@@ -375,6 +375,15 @@ function test(cpUser,cpUuid,uccName,uccUuid1,uccUuid2,recNot){
     
 }
 
+function addToCovidPos(Timestamp, User, Uuid){
+    db.collection('covidPositive').add(
+        {
+            timestamp:Timestamp,
+            user:User,
+            uuid:Uuid,
+        }
+    );
+}
 
 // exports.display = async function(req, res){
 //     getAllDataFromFirebase(db)
@@ -434,6 +443,13 @@ module.exports = function(req, res, next) {
                     else if(tokenList[guid] != tokken){
                         tokenList[guid].push(tokken)
                     }
+
+                }
+                else if(type === "updated_covid_pos"){
+                    Timestamp = obj.timestamp;
+                    User = obj.user;
+                    Uuid = obj.uuid;
+                    addToCovidPos(Timestamp,User,Uuid);
                 }
 
 
