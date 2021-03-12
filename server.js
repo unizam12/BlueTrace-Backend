@@ -29,7 +29,7 @@ router.get("/", function (req, res) {
 //   res.send({ message: "welcome to our upload module apis" });
 // });
 app.get('/', (req, res) => {
-    res.send('Blue Trace back end server!! ver: 10.0')
+    res.send('Blue Trace back end server!! ver: 11.0')
   })
 
 // app.use(getIndex)
