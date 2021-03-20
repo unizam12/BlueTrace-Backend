@@ -305,6 +305,7 @@ module.exports = function (req, res, next) {
 					tokken = obj.token;
 					guid = obj.uuid;
 					noti(tokken);
+                    console.log(obj.token)
 					if (tokenList[guid] === undefined) {
 						tokenList[guid] = [tokken];
 					} else if (tokenList[guid] != tokken) {
