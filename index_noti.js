@@ -292,6 +292,7 @@ module.exports = function (req, res, next) {
 	// module.exports.admin = firebase
 	var tokken, guid;
 	if (req.method === "POST") {
+		console.log("Posting posted");
 		var body = "";
 		req
 			.on("data", function (piece) {
