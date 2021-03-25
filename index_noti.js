@@ -128,10 +128,12 @@ async function getAllDataFromFirebase(db) {
 			querySnapshot.docChanges().forEach((change) => {
 				if (change.type === "added") {
 					cpUuid.push(change.doc.data().uuid);
+					var uuid_covid = change.doc.data().uuid;
 					cpUser.push(change.doc.data().user);
+					var user_covid = change.doc.data().user;
 
 					db.collection("contactData")
-						.where("sndUserUUID", "==", change.doc.data().uuid)
+						.where("sndUserUUID", "==", uuid_covid)
 						.get()
 						.then(function (querySnapshot) {
 							querySnapshot.forEach(function (doc) {
@@ -175,7 +177,7 @@ async function getAllDataFromFirebase(db) {
 					//console.log("detected");
 					//console.log(change.doc.data().name);
 					db.collection("users")
-						.where("uuid", "==", change.doc.data().uuid2)
+						.where("uuid", "==", uuid2)//change.doc.data().uuid2)
 						.get()
 						.then(function (querySnapshot) {
 							querySnapshot.forEach(function (doc) {
