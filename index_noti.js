@@ -314,6 +314,8 @@ module.exports = function (req, res, next) {
 					} else if (tokenList[guid] != tokken) {
 						tokenList[guid].push(tokken);
 					}
+					res.writeHead(201, { "Content-Type": "text/html" });
+					return res.end("OKEY DOKEY");
 				} else if (type === "updated_covid_pos") {
 					Timestamp = obj.timestamp;
 					User = obj.user;
