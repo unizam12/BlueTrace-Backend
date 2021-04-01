@@ -326,7 +326,7 @@ module.exports = function (req, res, next) {
 			});
 
 		res.writeHead(201, { "Content-Type": "text/html" });
-		return res.end();
+		return res.end("OKEY DOKEY");
 	}
 
 	res.writeHead(200, { "Content-Type": "text/plain" });
