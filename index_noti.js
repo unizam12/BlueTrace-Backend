@@ -169,7 +169,7 @@ async function getAllDataFromFirebase(db) {
 					var currUUID = change.doc.data().uuid1;
 					uccUuid1.push(change.doc.data().uuid1);
 					uccUuid2.push(change.doc.data().uuid2);
-					var uuid2 = change.doc.data().uuid2;
+					var my_uuid2 = change.doc.data().uuid2;
 					timestamp.push(change.doc.data().timestamp);
 					var times = change.doc.data().timestamp;
 					location.push(change.doc.data().location);
@@ -177,7 +177,7 @@ async function getAllDataFromFirebase(db) {
 					//console.log("detected");
 					//console.log(change.doc.data().name);
 					db.collection("users")
-						.where("uuid", "==", uuid2)//change.doc.data().uuid2)
+						.where("uuid", "==", my_uuid2)//change.doc.data().my_uuid2)
 						.get()
 						.then(function (querySnapshot) {
 							querySnapshot.forEach(function (doc) {
@@ -185,7 +185,7 @@ async function getAllDataFromFirebase(db) {
 								console.log(doc.id, " => ", doc.data());
 								db.collection("contactData").add({
 									uuid: currUUID,
-									sndUserUUID: uuid2,
+									sndUserUUID: my_uuid2,
 									sndUserName: doc.data().name,
 									covidStatus: doc.data().covidStatus,
 									location: loc,
