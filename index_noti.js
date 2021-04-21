@@ -315,12 +315,13 @@ module.exports = function (req, res, next) {
 						tokenList[guid].push(tokken);
 					}
 					res.writeHead(201, { "Content-Type": "text/html" });
-					return res.end("OKEY DOKEY");
+					return res.end("OKEY DOKEY noti");
 				} else if (type === "updated_covid_pos") {
-					Timestamp = obj.timestamp;
+					Timestampi = obj.timestamp;
 					User = obj.user;
 					Uuid = obj.uuid;
-					addToCovidPos(Timestamp, User, Uuid);
+					addToCovidPos(Timestampi, User, Uuid);
+					console.log(Timestampi);
 					res.writeHead(201, { "Content-Type": "text/html" });
 					return res.end("OKEY DOKEY covid");
 				}
