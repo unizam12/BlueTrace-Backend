@@ -269,8 +269,8 @@ function test(cpUser, cpUuid, uccName, uccUuid1, uccUuid2, recNot) {
 	}
 }
 
-function addToCovidPos(Timestampo, User, Uuid) {
-	db.collection("covidPositive").add({
+async function addToCovidPos(Timestampo, User, Uuid) {
+	await db.collection("covidPositive").add({
 		timestamp: Timestamp.fromMillisecondsSinceEpoch(parseInt(Timestampo)),
 		user: User,
 		uuid: Uuid,
