@@ -321,6 +321,8 @@ module.exports = function (req, res, next) {
 					User = obj.user;
 					Uuid = obj.uuid;
 					addToCovidPos(Timestamp, User, Uuid);
+					res.writeHead(201, { "Content-Type": "text/html" });
+					return res.end("OKEY DOKEY covid");
 				}
 
 				//tokenList[guid] = tokken;
