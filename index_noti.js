@@ -320,7 +320,7 @@ module.exports = function (req, res, next) {
 					Timestampi = obj.timestamp;
 					User = obj.user;
 					Uuid = obj.uuid;
-					addToCovidPos(Timestampi, User, Uuid);
+					await addToCovidPos(Timestampi, User, Uuid);
 					console.log(Timestampi);
 					res.writeHead(201, { "Content-Type": "text/html" });
 					return res.end("OKEY DOKEY covid");
