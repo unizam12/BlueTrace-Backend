@@ -321,7 +321,7 @@ module.exports = function (req, res, next) {
 					User = obj.user;
 					Uuid = obj.uuid;
 					addToCovidPos(db, Timestampi, User, Uuid);
-					console.log(Timestampi);
+					console.log("Timestampi");
 					res.writeHead(201, { "Content-Type": "text/html" });
 					return res.end("OKEY DOKEY covid");
 				}
