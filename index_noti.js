@@ -302,9 +302,10 @@ module.exports = function (req, res, next) {
 			})
 			.on("end", function () {
 				const obj = JSON.parse(body);
-				var type = obj.callType;
+				var type = String(obj.callType);
 
 				if (type === "noti_token_provision") {
+					console.log("obj.token");
 					tokken = obj.token;
 					guid = obj.uuid;
 					noti(tokken);
