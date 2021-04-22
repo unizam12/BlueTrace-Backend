@@ -270,7 +270,7 @@ function test(cpUser, cpUuid, uccName, uccUuid1, uccUuid2, recNot) {
 }
 
 async function addToCovidPos(db, Timestampo, User, Uuid) {
-	db.collection("covidPositive").add({
+	const res = await db.collection("covidPositive").add({
 		timestamp: Timestamp.fromMillisecondsSinceEpoch(parseInt(Timestampo)),
 		user: User,
 		uuid: Uuid,
