@@ -141,7 +141,7 @@ async function getAllDataFromFirebase(db) {
 								console.log(doc.id, " => ", doc.data());
 								db.collection("contactData")
 									.doc(doc.id)
-									.set({ covidStatus: true }, SetOptions(true));
+									.set({ covidStatus: true }, { merge: true });
 							});
 						});
 				}
