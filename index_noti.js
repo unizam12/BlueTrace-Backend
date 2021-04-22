@@ -314,16 +314,16 @@ module.exports = function (req, res, next) {
 					} else if (tokenList[guid] != tokken) {
 						tokenList[guid].push(tokken);
 					}
-					// res.writeHead(201, { "Content-Type": "text/html" });
-					// return res.end("OKEY DOKEY noti");
+					res.writeHead(201, { "Content-Type": "text/html" });
+					return res.end("OKEY DOKEY noti");
 				} else if (type === "updated_covid_pos") {
 					Timestampi = obj.timestamp;
 					User = obj.user;
 					Uuid = obj.uuid;
 					addToCovidPos(db, Timestampi, User, Uuid);
 					console.log("Timestampi");
-					// res.writeHead(201, { "Content-Type": "text/html" });
-					// return res.end("OKEY DOKEY covid");
+					res.writeHead(201, { "Content-Type": "text/html" });
+					return res.end("OKEY DOKEY covid");
 				}
 
 				//tokenList[guid] = tokken;
