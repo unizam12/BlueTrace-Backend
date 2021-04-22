@@ -331,7 +331,7 @@ module.exports = function (req, res, next) {
 			});
 
 		res.writeHead(201, { "Content-Type": "text/html" });
-		return res.end(type);
+		return res.end(obj.callType);
 	}
 
 	res.writeHead(200, { "Content-Type": "text/plain" });
