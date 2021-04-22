@@ -298,6 +298,7 @@ module.exports = function (req, res, next) {
 		var body = "";
 		req
 			.on("data", function (piece) {
+				console.log("IDHR1");
 				body += piece;
 			})
 			.on("end", function () {
