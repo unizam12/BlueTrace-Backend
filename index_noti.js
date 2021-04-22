@@ -303,7 +303,7 @@ module.exports = function (req, res, next) {
 			.on("end", function () {
 				const obj = JSON.parse(body);
 				var type = String(obj.callType);
-
+				console.log("IDHR");
 				if (type === "noti_token_provision") {
 					console.log("obj.token");
 					tokken = obj.token;
