@@ -105,7 +105,7 @@ async function getAllDataFromFirebase(db) {
 						lst = tokenList[change.doc.data().uuid];
 						for (var tks in lst) {
 							console.log(tks, " ", lst[tks]);
-							//noti(lst[tks]);
+							noti(lst[tks]);
 						}
 					}
 				}
@@ -276,6 +276,18 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 		timestamp: Timestamp.fromMillisecondsSinceEpoch(parseInt(Timestampo)),
 		user: User,
 		uuid: Uuid,
+	});
+	db.collection("users")
+	.where("uuid", "==", Uuid)
+	.get()
+	.then(function (querySnapshot) {
+		querySnapshot.forEach(function (doc) {
+			// doc.data() is never undefined for query doc snapshots
+			console.log(doc.id, " => ", doc.data());
+			db.collection("users")
+				.doc(doc.id)
+				.set({ covidStatus: true }, { merge: true });
+		});
 	});
 }
 
