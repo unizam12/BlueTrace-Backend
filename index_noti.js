@@ -293,7 +293,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-module.exports = async function (req, res, next) {
+module.exports = function (req, res) {
 	console.log("authondication checker process");
 	// if (req.session.auth || req.path === '/auth') {
 	//     next();
@@ -307,12 +307,12 @@ module.exports = async function (req, res, next) {
 	if (req.method === "POST") {
 		console.log("Posting posted");
 		var body = "";
-		await req
+		req
 			.on("data", function (piece) {
 				console.log("IDHR1");
 				body += piece;
-			})
-			.on("end", function () {
+			});
+			req.on("end", function () {
 				const obj = JSON.parse(body);
 				var type = String(obj.callType);
 				console.log("IDHR");
@@ -327,16 +327,16 @@ module.exports = async function (req, res, next) {
 					} else if (tokenList[guid] != tokken) {
 						tokenList[guid].push(tokken);
 					}
-					res.writeHead(201, { "Content-Type": "text/html" });
-					return res.end("OKEY DOKEY noti");
+					// res.writeHead(201, { "Content-Type": "text/html" });
+					// return res.end("OKEY DOKEY noti");
 				} else if (type === "updated_covid_pos") {
 					Timestampi = obj.timestamp;
 					User = obj.user;
 					Uuid = obj.uuid;
-					addToCovidPos(db, Timestampi, User, Uuid);
+					//addToCovidPos(db, Timestampi, User, Uuid);
 					console.log("Timestampi");
-					res.writeHead(201, { "Content-Type": "text/html" });
-					return res.end("OKEY DOKEY covid");
+					// res.writeHead(201, { "Content-Type": "text/html" });
+					// return res.end("OKEY DOKEY covid");
 				}
 
 				//tokenList[guid] = tokken;
