@@ -295,7 +295,7 @@ module.exports = async function (req, res, next) {
 	if (req.method === "POST") {
 		console.log("Posting posted");
 		var body = "";
-		req
+		await req
 			.on("data", function (piece) {
 				console.log("IDHR1");
 				body += piece;
