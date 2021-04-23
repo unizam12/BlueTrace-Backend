@@ -281,7 +281,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-module.exports = function (req, res, next) {
+module.exports = async function (req, res, next) {
 	console.log("authondication checker process");
 	// if (req.session.auth || req.path === '/auth') {
 	//     next();
@@ -333,11 +333,12 @@ module.exports = function (req, res, next) {
 
 		res.writeHead(201, { "Content-Type": "text/html" });
 		return res.end("IF STATEMENT");
+		
 	}
 
 	res.writeHead(200, { "Content-Type": "text/plain" });
 	res.end("Server Up and Running");
-	next();
+	
 };
 
 
