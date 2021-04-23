@@ -281,79 +281,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-// module.exports = function (req, res, next) {
-// 	console.log("authondication checker process");
-// 	// if (req.session.auth || req.path === '/auth') {
-// 	//     next();
-// 	// } else {
-// 	//     res.redirect("/auth");
-// 	// }
-// 	getAllDataFromFirebase(db);
-
-// 	// module.exports.admin = firebase
-// 	var tokken, guid;
-// 	if (req.method === "POST") {
-// 		console.log("Posting posted");
-// 		var body = "";
-// 		req
-// 			.on("data", function (piece) {
-// 				console.log("IDHR1");
-// 				body += piece;
-// 			})
-// 			.on("end", function () {
-// 				const obj = JSON.parse(body);
-// 				var type = String(obj.callType);
-// 				console.log("IDHR");
-// 				if (type === "noti_token_provision") {
-// 					console.log("obj.token");
-// 					tokken = obj.token;
-// 					guid = obj.uuid;
-// 					noti(tokken);
-//                     console.log(obj.token)
-// 					if (tokenList[guid] === undefined) {
-// 						tokenList[guid] = [tokken];
-// 					} else if (tokenList[guid] != tokken) {
-// 						tokenList[guid].push(tokken);
-// 					}
-// 					res.writeHead(201, { "Content-Type": "text/html" });
-// 					return res.end("OKEY DOKEY noti");
-// 				} else if (type === "updated_covid_pos") {
-// 					Timestampi = obj.timestamp;
-// 					User = obj.user;
-// 					Uuid = obj.uuid;
-// 					addToCovidPos(db, Timestampi, User, Uuid);
-// 					console.log("Timestampi");
-// 					res.writeHead(201, { "Content-Type": "text/html" });
-// 					return res.end("OKEY DOKEY covid");
-// 				}
-
-// 				//tokenList[guid] = tokken;
-// 				//console.log(tokenList);
-// 			});
-
-// 		res.writeHead(201, { "Content-Type": "text/html" });
-// 		return res.end("IF STATEMENT");
-// 	}
-
-// 	res.writeHead(200, { "Content-Type": "text/plain" });
-// 	res.end("Server Up and Running");
-// };
-
-
-const app = express();
-const port = process.env.PORT;
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname + '/index.html'));
-// });
-const cors = require("cors");
-app.use(cors());
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-app.post('/', (req, res) => {
+module.exports = function (req, res, next) {
 	console.log("authondication checker process");
 	// if (req.session.auth || req.path === '/auth') {
 	//     next();
@@ -408,9 +336,82 @@ app.post('/', (req, res) => {
 	}
 
 	res.writeHead(200, { "Content-Type": "text/plain" });
-	res.end("Server Up and Running");  
-  });
-app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
+	res.end("Server Up and Running");
+	next();
+};
+
+
+// const app = express();
+// const port = process.env.PORT;
+// // app.get('/', function(req, res) {
+// //     res.sendFile(path.join(__dirname + '/index.html'));
+// // });
+// const cors = require("cors");
+// app.use(cors());
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+// app.post('/', (req, res) => {
+// 	console.log("authondication checker process");
+// 	// if (req.session.auth || req.path === '/auth') {
+// 	//     next();
+// 	// } else {
+// 	//     res.redirect("/auth");
+// 	// }
+// 	getAllDataFromFirebase(db);
+
+// 	// module.exports.admin = firebase
+// 	var tokken, guid;
+// 	if (req.method === "POST") {
+// 		console.log("Posting posted");
+// 		var body = "";
+// 		req
+// 			.on("data", function (piece) {
+// 				console.log("IDHR1");
+// 				body += piece;
+// 			})
+// 			.on("end", function () {
+// 				const obj = JSON.parse(body);
+// 				var type = String(obj.callType);
+// 				console.log("IDHR");
+// 				if (type === "noti_token_provision") {
+// 					console.log("obj.token");
+// 					tokken = obj.token;
+// 					guid = obj.uuid;
+// 					noti(tokken);
+//                     console.log(obj.token)
+// 					if (tokenList[guid] === undefined) {
+// 						tokenList[guid] = [tokken];
+// 					} else if (tokenList[guid] != tokken) {
+// 						tokenList[guid].push(tokken);
+// 					}
+// 					res.writeHead(201, { "Content-Type": "text/html" });
+// 					return res.end("OKEY DOKEY noti");
+// 				} else if (type === "updated_covid_pos") {
+// 					Timestampi = obj.timestamp;
+// 					User = obj.user;
+// 					Uuid = obj.uuid;
+// 					addToCovidPos(db, Timestampi, User, Uuid);
+// 					console.log("Timestampi");
+// 					res.writeHead(201, { "Content-Type": "text/html" });
+// 					return res.end("OKEY DOKEY covid");
+// 				}
+
+// 				//tokenList[guid] = tokken;
+// 				//console.log(tokenList);
+// 			});
+
+// 		res.writeHead(201, { "Content-Type": "text/html" });
+// 		return res.end("IF STATEMENT");
+// 	}
+
+// 	res.writeHead(200, { "Content-Type": "text/plain" });
+// 	res.end("Server Up and Running");  
+//   });
+// app.listen(port, () => console.log(`url-shortener listening on port ${port}!`));
 
 
 //Notification Implementation:
