@@ -310,7 +310,7 @@ module.exports = function (req, res) {
 		var obj;
 		req.on("data", function (piece) {
 			console.log("IDHR1");
-			body += piece;
+			body += piece.toString();
 		});
 		req.on("end", function () {
 			obj = JSON.parse(body);
@@ -321,7 +321,6 @@ module.exports = function (req, res) {
 				tokken = obj.token;
 				guid = obj.uuid;
 				//noti(tokken);
-				console.log(obj.token)
 				if (tokenList[guid] === undefined) {
 					tokenList[guid] = [tokken];
 				} else if (tokenList[guid] != tokken) {
