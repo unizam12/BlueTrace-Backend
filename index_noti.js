@@ -104,7 +104,7 @@ async function getAllDataFromFirebase(db) {
 					} else {
 						lst = tokenList[change.doc.data().uuid];
 						for (var tks in lst) {
-							console.log(tks, " ", lst[tks]);
+							//console.log(tks, " ", lst[tks]);
 							noti(lst[tks]);
 						}
 					}
@@ -140,7 +140,7 @@ async function getAllDataFromFirebase(db) {
 						.then(function (querySnapshot) {
 							querySnapshot.forEach(function (doc) {
 								// doc.data() is never undefined for query doc snapshots
-								console.log(doc.id, " => ", doc.data());
+								//console.log(doc.id, " => ", doc.data());
 								db.collection("contactData")
 									.doc(doc.id)
 									.set({ covidStatus: true }, { merge: true });
@@ -184,7 +184,7 @@ async function getAllDataFromFirebase(db) {
 						.then(function (querySnapshot) {
 							querySnapshot.forEach(function (doc) {
 								// doc.data() is never undefined for query doc snapshots
-								console.log(doc.id, " => ", doc.data());
+								//console.log(doc.id, " => ", doc.data());
 								db.collection("contactData").add({
 									uuid: currUUID,
 									sndUserUUID: my_uuid2,
@@ -283,7 +283,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 	.then(function (querySnapshot) {
 		querySnapshot.forEach(function (doc) {
 			// doc.data() is never undefined for query doc snapshots
-			console.log(doc.id, " => ", doc.data());
+			//console.log(doc.id, " => ", doc.data());
 			db.collection("users")
 				.doc(doc.id)
 				.set({ covidStatus: true }, { merge: true });
@@ -307,41 +307,41 @@ module.exports = function (req, res) {
 	if (req.method === "POST") {
 		console.log("Posting posted");
 		var body = "";
-		req
-			.on("data", function (piece) {
-				console.log("IDHR1");
-				body += piece;
-			});
-			req.on("end", function () {
-				const obj = JSON.parse(body);
-				var type = String(obj.callType);
-				console.log("IDHR");
-				if (type === "noti_token_provision") {
-					console.log("obj.token");
-					tokken = obj.token;
-					guid = obj.uuid;
-					noti(tokken);
-                    console.log(obj.token)
-					if (tokenList[guid] === undefined) {
-						tokenList[guid] = [tokken];
-					} else if (tokenList[guid] != tokken) {
-						tokenList[guid].push(tokken);
-					}
-					// res.writeHead(201, { "Content-Type": "text/html" });
-					// return res.end("OKEY DOKEY noti");
-				} else if (type === "updated_covid_pos") {
-					Timestampi = obj.timestamp;
-					User = obj.user;
-					Uuid = obj.uuid;
-					//addToCovidPos(db, Timestampi, User, Uuid);
-					console.log("Timestampi");
-					// res.writeHead(201, { "Content-Type": "text/html" });
-					// return res.end("OKEY DOKEY covid");
+		var obj;
+		req.on("data", function (piece) {
+			console.log("IDHR1");
+			body += piece;
+		});
+		obj = JSON.parse(body);
+		req.on("end", function () {
+			const obj = JSON.parse(body);
+			var type = String(obj.callType);
+			console.log("IDHR");
+			if (type === "noti_token_provision") {
+				console.log("obj.token");
+				tokken = obj.token;
+				guid = obj.uuid;
+				//noti(tokken);
+				console.log(obj.token)
+				if (tokenList[guid] === undefined) {
+					tokenList[guid] = [tokken];
+				} else if (tokenList[guid] != tokken) {
+					tokenList[guid].push(tokken);
 				}
-
-				//tokenList[guid] = tokken;
-				//console.log(tokenList);
-			});
+				// res.writeHead(201, { "Content-Type": "text/html" });
+				// return res.end("OKEY DOKEY noti");
+			} else if (type === "updated_covid_pos") {
+				Timestampi = obj.timestamp;
+				User = obj.user;
+				Uuid = obj.uuid;
+				//addToCovidPos(db, Timestampi, User, Uuid);
+				console.log("Timestampi");
+				// res.writeHead(201, { "Content-Type": "text/html" });
+				// return res.end("OKEY DOKEY covid");
+			}
+			//tokenList[guid] = tokken;
+			//console.log(tokenList);
+		});
 
 		res.writeHead(201, { "Content-Type": "text/html" });
 		return res.end("IF STATEMENT");
