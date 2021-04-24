@@ -272,7 +272,7 @@ function test(cpUser, cpUuid, uccName, uccUuid1, uccUuid2, recNot) {
 }
 
 async function addToCovidPos(db, Timestampo, User, Uuid) {
-	const res = await db.collection("covidPositive").add({
+	await db.collection("covidPositive").add({
 		timestamp: Timestamp.fromMillisecondsSinceEpoch(parseInt(Timestampo)),
 		user: User,
 		uuid: Uuid,
@@ -312,9 +312,8 @@ module.exports = function (req, res) {
 			console.log("IDHR1");
 			body += piece;
 		});
-		obj = JSON.parse(body);
 		req.on("end", function () {
-			const obj = JSON.parse(body);
+			obj = JSON.parse(body);
 			var type = String(obj.callType);
 			console.log("IDHR");
 			if (type === "noti_token_provision") {
