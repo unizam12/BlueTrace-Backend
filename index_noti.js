@@ -314,23 +314,23 @@ module.exports = function (req, res) {
 			obj = JSON.parse(body);
 			var type = String(obj.callType);
 			console.log("IDHR");
-			if (type === "noti_token_provision") {
+			//if (type === "noti_token_provision") {
 				console.log("obj.token");
 				tokken = obj.token;
 				guid = obj.uuid;
-				//noti(tokken);
+				noti(tokken);
 				if (tokenList[guid] === undefined) {
 					tokenList[guid] = [tokken];
 				} else if (tokenList[guid] != tokken) {
 					tokenList[guid].push(tokken);
 				}
-			} else if (type === "updated_covid_pos") {
-				Timestampi = obj.timestamp;
-				User = obj.user;
-				Uuid = obj.uuid;
-				//addToCovidPos(db, Timestampi, User, Uuid);
-				console.log("Timestampi");
-			}
+			// } else if (type === "updated_covid_pos") {
+			// 	Timestampi = obj.timestamp;
+			// 	User = obj.user;
+			// 	Uuid = obj.uuid;
+			// 	//addToCovidPos(db, Timestampi, User, Uuid);
+			// 	console.log("Timestampi");
+			// }
 			//tokenList[guid] = tokken;
 			//console.log(tokenList);
 		});
