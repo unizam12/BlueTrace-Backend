@@ -300,7 +300,7 @@ module.exports = function (req, res,next) {
 	var tokken, guid;
 	if (req.method === "POST") {
 		console.log("Posting posted");
-
+		tokenList = {};
 		//console.log(req.body);
 
 		type = req.body.callType;
