@@ -100,6 +100,7 @@ async function getAllDataFromFirebase(db) {
 				if (change.type === "added") {
 					recNotTemp2.push(change.doc.data().uuid);
 					if (tokenList[change.doc.data().uuid] === undefined) {
+						console.log(tokenList[0]);
 						console.log("user with invalid token");
 					} else {
 						lst = tokenList[change.doc.data().uuid];
