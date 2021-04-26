@@ -297,8 +297,10 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 module.exports = function (req, res,next) {
 	console.log("middleware launch");
 	getAllDataFromFirebase(db);
+	var tokken, guid;
 	if (req.method === "POST") {
 		console.log("Posting posted");
+
 		//console.log(req.body);
 
 		type = req.body.callType;
@@ -346,17 +348,17 @@ module.exports = function (req, res,next) {
 // 	var body = "";
 // 	var obj;
 
-	type = req.body.callType;
-	tokken = req.body.token;
-	guid = req.body.uuid;
-	console.log("CALLED");
-	console.log(type);
-	//noti(tokken);
-	if (tokenList[guid] === undefined) {
-		tokenList[guid] = [tokken];
-	} else if (tokenList[guid] != tokken) {
-		tokenList[guid].push(tokken);
-	}
+	// type = req.body.callType;
+	// tokken = req.body.token;
+	// guid = req.body.uuid;
+	// console.log("CALLED");
+	// console.log(type);
+	// //noti(tokken);
+	// if (tokenList[guid] === undefined) {
+	// 	tokenList[guid] = [tokken];
+	// } else if (tokenList[guid] != tokken) {
+	// 	tokenList[guid].push(tokken);
+	// }
 // 	res.send("POST REQUEST PROCESSED");
 // });
 
