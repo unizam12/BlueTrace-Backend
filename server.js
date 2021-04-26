@@ -19,24 +19,24 @@ app.use(cors());
 app.use("/files", express.static(path.join(__dirname, "public")));
 
 // test route
-app.post('/', function (req, res) {
-	// var type, tokken, guid;
-	// var body = "";
-	// var obj;
+// app.post('/', function (req, res) {
+// 	// var type, tokken, guid;
+// 	// var body = "";
+// 	// var obj;
 
-	// type = req.body.callType;
-	// tokken = req.body.token;
-	// guid = req.body.uuid;
-	// console.log("CALLED");
-	// console.log(type);
-	// //noti(tokken);
-	// if (tokenList[guid] === undefined) {
-	// 	tokenList[guid] = [tokken];
-	// } else if (tokenList[guid] != tokken) {
-	// 	tokenList[guid].push(tokken);
-	// }
-	res.send("POST REQUEST PROCESSED");
-});
+// 	// type = req.body.callType;
+// 	// tokken = req.body.token;
+// 	// guid = req.body.uuid;
+// 	// console.log("CALLED");
+// 	// console.log(type);
+// 	// //noti(tokken);
+// 	// if (tokenList[guid] === undefined) {
+// 	// 	tokenList[guid] = [tokken];
+// 	// } else if (tokenList[guid] != tokken) {
+// 	// 	tokenList[guid].push(tokken);
+// 	// }
+// 	res.send("POST REQUEST PROCESSED");
+// });
 
 router.get("/", function (req, res) {
 	res.send({ message: "trying to deploy backend" });
