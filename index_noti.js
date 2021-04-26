@@ -295,14 +295,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 module.exports = function (req, res) {
 	console.log("authondication checker process");
-	// if (req.session.auth || req.path === '/auth') {
-	//     next();
-	// } else {
-	//     res.redirect("/auth");
-	// }
 	getAllDataFromFirebase(db);
-
-	// module.exports.admin = firebase
 	var tokken, guid;
 	if (req.method === "POST") {
 		console.log("Posting posted");
@@ -326,29 +319,21 @@ module.exports = function (req, res) {
 				} else if (tokenList[guid] != tokken) {
 					tokenList[guid].push(tokken);
 				}
-				// res.writeHead(201, { "Content-Type": "text/html" });
-				// return res.end("OKEY DOKEY noti");
 			} else if (type === "updated_covid_pos") {
 				Timestampi = obj.timestamp;
 				User = obj.user;
 				Uuid = obj.uuid;
 				//addToCovidPos(db, Timestampi, User, Uuid);
 				console.log("Timestampi");
-				// res.writeHead(201, { "Content-Type": "text/html" });
-				// return res.end("OKEY DOKEY covid");
 			}
 			//tokenList[guid] = tokken;
 			//console.log(tokenList);
 		});
-
 		res.writeHead(201, { "Content-Type": "text/html" });
 		return res.end("IF STATEMENT");
-		
 	}
-
 	res.writeHead(200, { "Content-Type": "text/plain" });
 	res.end("Server Up and Running");
-	
 };
 
 
