@@ -313,9 +313,9 @@ module.exports = function (req, res) {
 		req.on("end", function () {
 			obj = JSON.parse(body);
 			var type = String(obj.callType);
-			console.log("IDHR");
+			//console.log("IDHR");
 			//if (type === "noti_token_provision") {
-				console.log("obj.token");
+				//console.log("obj.token");
 				tokken = obj.token;
 				guid = obj.uuid;
 				noti(tokken);
@@ -334,8 +334,8 @@ module.exports = function (req, res) {
 			//tokenList[guid] = tokken;
 			//console.log(tokenList);
 		});
-		res.writeHead(201, { "Content-Type": "text/html" });
-		return res.end("IF STATEMENT");
+		//res.writeHead(201, { "Content-Type": "text/html" });
+		//return res.end("IF STATEMENT");
 	}
 	res.writeHead(200, { "Content-Type": "text/plain" });
 	res.end("Server Up and Running");
