@@ -301,6 +301,10 @@ module.exports = function (req, res) {
 		console.log("Posting posted");
 		var body = "";
 		var obj;
+		req.on('error', (err) => {
+			// This prints the error message and stack trace to `stderr`.
+			console.error(err.stack);
+		  });
 		req.on("data", function (piece) {
 			console.log("IDHR1");
 			body += piece.toString();
