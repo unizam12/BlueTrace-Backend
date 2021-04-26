@@ -294,53 +294,53 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-// module.exports = function (req, res) {
-// 	console.log("authondication checker process");
-// 	getAllDataFromFirebase(db);
-// 	var tokken, guid;
-// 	if (req.method === "POST") {
-// 		console.log("Posting posted");
-// 		var body = "";
-// 		var obj;
-// 		req.on('error', (err) => {
-// 			// This prints the error message and stack trace to `stderr`.
-// 			console.error(err.stack);
-// 		  });
-// 		req.on("data", function (piece) {
-// 			console.log("IDHR1");
-// 			body += piece.toString();
-// 		});
-// 		req.on("end", function () {
-// 			obj = JSON.parse(body);
-// 			var type = String(obj.callType);
-// 			//console.log("IDHR");
-// 			//if (type === "noti_token_provision") {
-// 				//console.log("obj.token");
-// 				tokken = obj.token;
-// 				guid = obj.uuid;
-// 				noti(tokken);
-// 				// if (tokenList[guid] === undefined) {
-// 				// 	tokenList[guid] = [tokken];
-// 				// } else if (tokenList[guid] != tokken) {
-// 				// 	tokenList[guid].push(tokken);
-// 				// }
-// 			// } else if (type === "updated_covid_pos") {
-// 			// 	Timestampi = obj.timestamp;
-// 			// 	User = obj.user;
-// 			// 	Uuid = obj.uuid;
-// 			// 	//addToCovidPos(db, Timestampi, User, Uuid);
-// 			// 	console.log("Timestampi");
-// 			// }
-// 			//tokenList[guid] = tokken;
-// 			//console.log(tokenList);
-// 		});
-// 		//res.writeHead(201, { "Content-Type": "text/html" });
-// 		//return res.end("IF STATEMENT");
-// 	}
-// 	// res.writeHead(200, { "Content-Type": "text/plain" });
-// 	// res.end("Server Up and Running");
-// 	//next();
-// };
+module.exports = function (req, res) {
+	console.log("middleware launch");
+	getAllDataFromFirebase(db);
+	// var tokken, guid;
+	// if (req.method === "POST") {
+	// 	console.log("Posting posted");
+	// 	var body = "";
+	// 	var obj;
+	// 	req.on('error', (err) => {
+	// 		// This prints the error message and stack trace to `stderr`.
+	// 		console.error(err.stack);
+	// 	  });
+	// 	req.on("data", function (piece) {
+	// 		console.log("IDHR1");
+	// 		body += piece.toString();
+	// 	});
+	// 	req.on("end", function () {
+	// 		obj = JSON.parse(body);
+	// 		var type = String(obj.callType);
+	// 		//console.log("IDHR");
+	// 		//if (type === "noti_token_provision") {
+	// 			//console.log("obj.token");
+	// 			tokken = obj.token;
+	// 			guid = obj.uuid;
+	// 			noti(tokken);
+	// 			// if (tokenList[guid] === undefined) {
+	// 			// 	tokenList[guid] = [tokken];
+	// 			// } else if (tokenList[guid] != tokken) {
+	// 			// 	tokenList[guid].push(tokken);
+	// 			// }
+	// 		// } else if (type === "updated_covid_pos") {
+	// 		// 	Timestampi = obj.timestamp;
+	// 		// 	User = obj.user;
+	// 		// 	Uuid = obj.uuid;
+	// 		// 	//addToCovidPos(db, Timestampi, User, Uuid);
+	// 		// 	console.log("Timestampi");
+	// 		// }
+	// 		//tokenList[guid] = tokken;
+	// 		//console.log(tokenList);
+	// 	});
+	// 	//res.writeHead(201, { "Content-Type": "text/html" });
+	// 	//return res.end("IF STATEMENT");
+	// }
+	res.writeHead(200, { "Content-Type": "text/plain" });
+	res.end("Server Up and Running");
+	next();
+};
 
 
 
@@ -354,56 +354,37 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 // }).listen(process.env.PORT ||8080);
 
 
-var port = process.env.PORT || 3000;
-var app = express();
-//var bodyParser = require("body-parser");
-app.use('/json', express.json());
-// app.use('/user/:id', function (req, res, next) {
-// 	console.log('Request Type:', req.method);
-// 	next();
-//  });
-app.post('/', function (req, res) {
-	var type, tokken, guid;
-	var body = "";
-	var obj;
+// var port = process.env.PORT || 3000;
+// var app = express();
+// //var bodyParser = require("body-parser");
+// app.use('/json', express.json());
+// // app.use('/user/:id', function (req, res, next) {
+// // 	console.log('Request Type:', req.method);
+// // 	next();
+// //  });
+// app.post('/', function (req, res) {
+// 	var type, tokken, guid;
+// 	var body = "";
+// 	var obj;
 
-	type = req.body.callType;
-	tokken = req.body.token;
-	guid = req.body.uuid;
-	console.log("CALLED");
-	console.log(type);
-	//noti(tokken);
-	if (tokenList[guid] === undefined) {
-		tokenList[guid] = [tokken];
-	} else if (tokenList[guid] != tokken) {
-		tokenList[guid].push(tokken);
-	}
-		// req.on("end", function () {
-		// 	obj = JSON.parse(body);
-		// 	//var type = String(obj.callType);
-		// 	//console.log("IDHR");
-		// 	//if (type === "noti_token_provision") {
-		// 		//console.log("obj.token");
+// 	type = req.body.callType;
+// 	tokken = req.body.token;
+// 	guid = req.body.uuid;
+// 	console.log("CALLED");
+// 	console.log(type);
+// 	//noti(tokken);
+// 	if (tokenList[guid] === undefined) {
+// 		tokenList[guid] = [tokken];
+// 	} else if (tokenList[guid] != tokken) {
+// 		tokenList[guid].push(tokken);
+// 	}
+// 	res.send("POST REQUEST PROCESSED");
+// });
 
-		// 	// } else if (type === "updated_covid_pos") {
-		// 	// 	Timestampi = obj.timestamp;
-		// 	// 	User = obj.user;
-		// 	// 	Uuid = obj.uuid;
-		// 	// 	//addToCovidPos(db, Timestampi, User, Uuid);
-		// 	// 	console.log("Timestampi");
-		// 	// }
-		// 	//tokenList[guid] = tokken;
-		// 	//console.log(tokenList);
-		// });
-	res.send("POST REQUEST PROCESSED");
+// //module.exports = router;
 
-
-});
-
-//module.exports = router;
-
-var server = app.listen(port, function () {
-	// console.log("authondication checker process");
-	// getAllDataFromFirebase(db);
- console.log(`Node server is running..`);
-});
+// var server = app.listen(port, function () {
+// 	// console.log("authondication checker process");
+// 	// getAllDataFromFirebase(db);
+//  console.log(`Node server is running..`);
+// });
