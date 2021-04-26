@@ -294,9 +294,13 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-module.exports = function (req, res) {
+module.exports = function (req, res,next) {
 	console.log("middleware launch");
 	getAllDataFromFirebase(db);
+	if (req.method === "POST") {
+		console.log("Posting posted");
+		console.log(req.body);
+	}
 	// var tokken, guid;
 	// if (req.method === "POST") {
 	// 	console.log("Posting posted");
