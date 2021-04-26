@@ -358,7 +358,10 @@ var port = process.env.PORT || 3000;
 var app = express();
 //var bodyParser = require("body-parser");
 app.use(express.json());
-
+// app.use('/user/:id', function (req, res, next) {
+// 	console.log('Request Type:', req.method);
+// 	next();
+//  });
 app.post('/', function (req, res) {
 	var type, tokken, guid;
 	var body = "";
@@ -396,7 +399,7 @@ app.post('/', function (req, res) {
 
 });
 
-module.exports = router;
+//module.exports = router;
 
 var server = app.listen(port, function () {
 	// console.log("authondication checker process");
