@@ -299,8 +299,76 @@ module.exports = function (req, res,next) {
 	getAllDataFromFirebase(db);
 	if (req.method === "POST") {
 		console.log("Posting posted");
-		console.log(req.body);
+		//console.log(req.body);
+
+		type = req.body.callType;
+		tokken = req.body.token;
+		guid = req.body.uuid;
+		//console.log("CALLED");
+		//console.log(type);
+		noti(tokken);
+		if (tokenList[guid] === undefined) {
+			tokenList[guid] = [tokken];
+		} else if (tokenList[guid] != tokken) {
+			tokenList[guid].push(tokken);
+		}
 	}
+
+	else{
+		res.writeHead(200, { "Content-Type": "text/plain" });
+		res.end("Server Up and Running");
+	}
+	next();
+};
+
+
+
+
+//Notification Implementation:
+//module.exports.admin = firebase
+// http.createServer(function (req, res) {
+
+// 	res.writeHead(200, { "Content-Type": "text/plain" });
+// 	res.end("Server Up and Running");
+// }).listen(process.env.PORT ||8080);
+
+
+// var port = process.env.PORT || 3000;
+// var app = express();
+// //var bodyParser = require("body-parser");
+// app.use('/json', express.json());
+// // app.use('/user/:id', function (req, res, next) {
+// // 	console.log('Request Type:', req.method);
+// // 	next();
+// //  });
+// app.post('/', function (req, res) {
+// 	var type, tokken, guid;
+// 	var body = "";
+// 	var obj;
+
+	type = req.body.callType;
+	tokken = req.body.token;
+	guid = req.body.uuid;
+	console.log("CALLED");
+	console.log(type);
+	//noti(tokken);
+	if (tokenList[guid] === undefined) {
+		tokenList[guid] = [tokken];
+	} else if (tokenList[guid] != tokken) {
+		tokenList[guid].push(tokken);
+	}
+// 	res.send("POST REQUEST PROCESSED");
+// });
+
+// //module.exports = router;
+
+// var server = app.listen(port, function () {
+// 	// console.log("authondication checker process");
+// 	// getAllDataFromFirebase(db);
+//  console.log(`Node server is running..`);
+// });
+
+
 	// var tokken, guid;
 	// if (req.method === "POST") {
 	// 	console.log("Posting posted");
@@ -341,54 +409,3 @@ module.exports = function (req, res,next) {
 	// 	//res.writeHead(201, { "Content-Type": "text/html" });
 	// 	//return res.end("IF STATEMENT");
 	// }
-	res.writeHead(200, { "Content-Type": "text/plain" });
-	res.end("Server Up and Running");
-	next();
-};
-
-
-
-
-//Notification Implementation:
-//module.exports.admin = firebase
-// http.createServer(function (req, res) {
-
-// 	res.writeHead(200, { "Content-Type": "text/plain" });
-// 	res.end("Server Up and Running");
-// }).listen(process.env.PORT ||8080);
-
-
-// var port = process.env.PORT || 3000;
-// var app = express();
-// //var bodyParser = require("body-parser");
-// app.use('/json', express.json());
-// // app.use('/user/:id', function (req, res, next) {
-// // 	console.log('Request Type:', req.method);
-// // 	next();
-// //  });
-// app.post('/', function (req, res) {
-// 	var type, tokken, guid;
-// 	var body = "";
-// 	var obj;
-
-// 	type = req.body.callType;
-// 	tokken = req.body.token;
-// 	guid = req.body.uuid;
-// 	console.log("CALLED");
-// 	console.log(type);
-// 	//noti(tokken);
-// 	if (tokenList[guid] === undefined) {
-// 		tokenList[guid] = [tokken];
-// 	} else if (tokenList[guid] != tokken) {
-// 		tokenList[guid].push(tokken);
-// 	}
-// 	res.send("POST REQUEST PROCESSED");
-// });
-
-// //module.exports = router;
-
-// var server = app.listen(port, function () {
-// 	// console.log("authondication checker process");
-// 	// getAllDataFromFirebase(db);
-//  console.log(`Node server is running..`);
-// });
