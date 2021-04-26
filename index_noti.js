@@ -308,7 +308,7 @@ module.exports = function (req, res,next) {
 		guid = req.body.uuid;
 		//console.log("CALLED");
 		//console.log(type);
-		noti(tokken);
+		//noti(tokken);
 		if (tokenList[guid] === undefined) {
 			tokenList[guid] = [tokken];
 		} else if (tokenList[guid] != tokken) {
