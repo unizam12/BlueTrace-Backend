@@ -294,7 +294,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-// module.exports = function (req, res,next) {
+// module.exports = function (req, res) {
 // 	console.log("authondication checker process");
 // 	getAllDataFromFirebase(db);
 // 	var tokken, guid;
@@ -337,18 +337,27 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 // 		//res.writeHead(201, { "Content-Type": "text/html" });
 // 		//return res.end("IF STATEMENT");
 // 	}
-// 	res.writeHead(200, { "Content-Type": "text/plain" });
-// 	res.end("Server Up and Running");
-// 	next();
+// 	// res.writeHead(200, { "Content-Type": "text/plain" });
+// 	// res.end("Server Up and Running");
+// 	//next();
 // };
 
 
 
 
 //Notification Implementation:
-module.exports.admin = firebase
-http.createServer(function (req, res) {
+//module.exports.admin = firebase
+// http.createServer(function (req, res) {
 
+// 	res.writeHead(200, { "Content-Type": "text/plain" });
+// 	res.end("Server Up and Running");
+// }).listen(process.env.PORT ||8080);
+
+
+var port = process.env.PORT || 3000;
+var app = express();
+app.get('/', function (req, res) {
+	console.log("authondication checker process");
 	getAllDataFromFirebase(db);
 	var tokken, guid;
 	if (req.method === "POST") {
@@ -390,6 +399,12 @@ http.createServer(function (req, res) {
 		//res.writeHead(201, { "Content-Type": "text/html" });
 		//return res.end("IF STATEMENT");
 	}
-	res.writeHead(200, { "Content-Type": "text/plain" });
-	res.end("Server Up and Running");
-}).listen(process.env.PORT ||8080);
+	else{
+		res.writeHead(200, { "Content-Type": "text/plain" });
+		res.end("Server Up and Running");
+	}
+
+});
+app.listen(port, function () {
+ console.log(`Example app listening on port !`);
+});
