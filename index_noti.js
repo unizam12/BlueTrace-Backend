@@ -395,6 +395,9 @@ app.post('/', function (req, res) {
 
 
 });
+
+module.exports = router;
+
 var server = app.listen(port, function () {
 	// console.log("authondication checker process");
 	// getAllDataFromFirebase(db);
