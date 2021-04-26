@@ -370,8 +370,9 @@ app.post('/', function (req, res) {
 	type = req.body.callType;
 	tokken = req.body.token;
 	guid = req.body.uuid;
-
-	noti(tokken);
+	console.log("CALLED");
+	console.log(type);
+	//noti(tokken);
 	if (tokenList[guid] === undefined) {
 		tokenList[guid] = [tokken];
 	} else if (tokenList[guid] != tokken) {
