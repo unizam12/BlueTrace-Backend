@@ -294,7 +294,7 @@ async function addToCovidPos(db, Timestampo, User, Uuid) {
 
 
 
-module.exports = function (req, res) {
+module.exports = function (req, res,next) {
 	console.log("authondication checker process");
 	getAllDataFromFirebase(db);
 	var tokken, guid;
@@ -339,6 +339,7 @@ module.exports = function (req, res) {
 	}
 	res.writeHead(200, { "Content-Type": "text/plain" });
 	res.end("Server Up and Running");
+	next();
 };
 
 
