@@ -5,7 +5,7 @@ let cors = require("cors");
 const PORT = process.env.PORT || 3000;
 var router = express.Router();
 var app = express();
-var getIndex = require("./index.js");
+//var getIndex = require("./index.js");
 var getIndexNoti = require("./index_noti.js");
 
 // body parser added
